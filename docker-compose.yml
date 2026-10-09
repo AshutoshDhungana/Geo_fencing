@@ -1,0 +1,18 @@
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: geofence
+      POSTGRES_USER: geofence
+      POSTGRES_PASSWORD: geofence
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U geofence -d geofence"]
+      interval: 2s
+      retries: 15
+
+volumes:
+  pgdata:
